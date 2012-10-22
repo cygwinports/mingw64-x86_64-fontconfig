@@ -1,0 +1,10 @@
+--- origsrc/fontconfig-2.8.0/src/Makefile.am	2009-11-18 17:49:09.000000000 -0600
++++ src/fontconfig-2.8.0/src/Makefile.am	2011-01-24 19:45:05.428226800 -0600
+@@ -30,6 +30,7 @@ fontconfig_def_dependency = fontconfig.d
+ # gcc import library install/uninstall
+ 
+ install-libtool-import-lib: 
++	$(MKDIR_P) $(DESTDIR)$(libdir)
+ 	$(INSTALL) .libs/libfontconfig.dll.a $(DESTDIR)$(libdir)
+ 	$(INSTALL) fontconfig.def $(DESTDIR)$(libdir)/fontconfig.def
+ 
