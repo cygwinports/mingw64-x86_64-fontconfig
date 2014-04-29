@@ -1,0 +1,14 @@
+--- origsrc/fontconfig-2.11.1/conf.d/Makefile.am	2014-01-20 02:14:19.000000000 -0600
++++ src/fontconfig-2.11.1/conf.d/Makefile.am	2014-04-29 00:55:36.978434800 -0500
+@@ -88,9 +88,9 @@ install-data-hook:
+ 	@(echo cd $(DESTDIR)$(configdir);			\
+ 	  cd $(DESTDIR)$(configdir);				\
+ 	  for i in $(CONF_LINKS); do				\
+-	    echo $(RM) $$i";" ln -s $(templatedir)/$$i .;	\
++	    echo $(RM) $$i";" $(LN_S) $(templatedir)/$$i .;	\
+ 	    $(RM) $$i;						\
+-	    ln -s $(templatedir)/$$i .;				\
++	    $(LN_S) $(templatedir)/$$i .;			\
+ 	  done)
+ uninstall-local:
+ 	@(echo cd $(DESTDIR)$(configdir);			\
