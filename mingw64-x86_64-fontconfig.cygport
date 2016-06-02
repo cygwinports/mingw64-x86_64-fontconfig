@@ -2,7 +2,7 @@ CROSS_HOST="x86_64-w64-mingw32"
 inherit cross
 
 NAME="mingw64-x86_64-fontconfig"
-VERSION=2.11.94
+VERSION=2.11.95
 RELEASE=1
 CATEGORY="Devel"
 SUMMARY="Font configuration library for Win64 toolchain"
@@ -15,9 +15,22 @@ SRC_URI="http://fontconfig.org/release/fontconfig-${VERSION}.tar.bz2"
 SRC_DIR="fontconfig-${VERSION}"
 PATCH_URI="2.11.1-cross-mingw-ln-s.patch"
 
-CYGCONF_ARGS="--disable-docs"
+CYGCONF_ARGS="
+	--with-default-fonts=WINDOWSFONTDIR
+	--with-add-fonts=CYGWINFONTDIR
+	--disable-docs
+	--disable-static
+"
 
 src_install() {
 	cd ${B}
 	cyginstall LN_S="cp"
+
+	dodir /etc/postinstall
+	cat > ${D}/etc/postinstall/${NAME}.sh <<_EOF
+sed -i -e "s|CYGWINFONTDIR|\`cygpath -m /usr/share/fonts\`|" ${CROSS_PREFIX}/etc/fonts/fonts.conf
+_EOF
+	cat > ${D}/etc/postinstall/zp_${NAME}_cache.sh <<_EOF
+${CROSS_BINDIR}/fc-cache -s || :
+_EOF
 }
