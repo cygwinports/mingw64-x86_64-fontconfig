@@ -2,7 +2,7 @@ CROSS_HOST="x86_64-w64-mingw32"
 inherit cross
 
 NAME="mingw64-x86_64-fontconfig"
-VERSION=2.12.1
+VERSION=2.12.4
 RELEASE=1
 CATEGORY="Devel"
 SUMMARY="Font configuration library for Win64 toolchain"
@@ -14,6 +14,8 @@ HOMEPAGE="http://fontconfig.org/wiki/"
 SRC_URI="http://fontconfig.org/release/fontconfig-${VERSION}.tar.bz2"
 SRC_DIR="fontconfig-${VERSION}"
 PATCH_URI="2.11.1-cross-mingw-ln-s.patch"
+
+DISTCLEANFILES="src/fcobjshash.gperf src/fcobjshash.h"
 
 CYGCONF_ARGS="
 	--with-default-fonts=WINDOWSFONTDIR
