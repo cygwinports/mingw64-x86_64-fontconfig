@@ -2,7 +2,7 @@ CROSS_HOST="x86_64-w64-mingw32"
 inherit cross
 
 NAME="mingw64-x86_64-fontconfig"
-VERSION=2.12.4
+VERSION=2.12.6
 RELEASE=1
 CATEGORY="Devel"
 SUMMARY="Font configuration library for Win64 toolchain"
